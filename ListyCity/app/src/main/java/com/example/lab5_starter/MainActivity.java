@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements CityDialogFragmen
     private FirebaseFirestore db;
     private CollectionReference citiesRef;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +106,23 @@ public class MainActivity extends AppCompatActivity implements CityDialogFragmen
         DocumentReference docRef = citiesRef.document(city.getName());
         docRef.set(city);
 
+    }
+
+    public void deleteStatus(City city){
+        cityArrayList.add(city);
+        cityArrayAdapter.notifyDataSetChanged();
+
+        DocumentReference docRef = citiesRef.document(city.getName());
+        docRef.set(city);
+    }
+
+    @Override
+    public void deleteCity(City city){
+        cityArrayList.remove(city);
+        cityArrayAdapter.notifyDataSetChanged();
+
+        DocumentReference docRef = citiesRef.document(city.getName());
+        docRef.delete();
     }
 
     public void addDummyData(){
